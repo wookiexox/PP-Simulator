@@ -61,6 +61,9 @@ internal class Creature
         }
     }
 
+
+
+
     public Creature(string name, int level = 1)
     {
         Name = name;
@@ -71,6 +74,9 @@ internal class Creature
     {
 
     }
+
+
+
 
     public void SayHi()
     {
@@ -85,5 +91,28 @@ internal class Creature
     public void Upgrade()
     {
         if (_level < 10) _level++;
+    }
+
+
+
+
+    public void Go(Direction direction)
+    {
+        string directionString = direction.ToString().ToLower();
+        Console.WriteLine($"{Name} goes {directionString}");
+    }
+
+    public void Go(Direction[] directions)
+    {
+        foreach (var direction in directions)
+        {
+            Go(direction);
+        }
+    }
+
+    public void Go(string directionsString)
+    {
+        Direction[] directions = DirectionParser.Parse(directionsString);
+        Go(directions);
     }
 }
