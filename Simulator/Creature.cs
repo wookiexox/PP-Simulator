@@ -7,71 +7,33 @@ using System.Threading.Tasks;
 
 namespace Simulator;
 
-internal abstract class Creature
+internal class Creature
 {
     private string _name = "Unknown";
     private int _level;
-    public abstract int Power { get; }
+    public virtual int Power { get; }
 
     public string Name
     {
         get { return _name; }
-        init
-        {
-            string trimmedName = value.Trim();
-
-            if (string.IsNullOrEmpty(trimmedName))
-            {
-                _name = "Unknown";
-            }
-            else
-            {
-                if (trimmedName.Length < 3)
-                {
-                    trimmedName = trimmedName.PadRight(3, '#');
-                }
-                else if (trimmedName.Length > 25)
-                {
-                    trimmedName = trimmedName.Substring(0, 25).TrimEnd();
-                    if (trimmedName.Length < 3) trimmedName.PadRight(3, '#');
-                }
-
-                if (char.IsLower(trimmedName[0]))
-                {
-                    trimmedName = char.ToUpper(trimmedName[0]) + trimmedName.Substring(1);
-                }
-
-                _name = trimmedName;
-            }
-        }
-    }
+        init { _name = Validator.Shortener(value, 3, 20, '#'); }
+    } 
 
     public int Level
     {
         get { return _level; }
-        init
-        {
-            if (value < 1)
-            {
-                _level = 1;
-            }
-            else if (value > 10)
-            {
-                _level = 10;
-            }
-            else _level = value;
-        }
+        init { _level = Validator.Limiter(value, 0, 10); }
     }
 
 
 
 
-    public Creature(string name, int level = 1)
+    public Creature(string name, int level)
     {
         Name = name;
         Level = level;
     }
-
+        
     public Creature()
     {
 
@@ -80,21 +42,23 @@ internal abstract class Creature
 
 
 
-    public abstract void SayHi();
+    public virtual void SayHi() { }
 
-    public string Info
-    {
-        get { return $"{Name} [{Level}]"; }
-    }
+    public virtual string Info { get; }
 
     public void Upgrade()
     {
         if (_level < 10) _level++;
     }
 
-    
-    
-    
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Name} [{Level}]{Info}";
+    }
+
+
+
+
     public void Go(Direction direction)
     {
         string directionString = direction.ToString().ToLower();
@@ -125,25 +89,14 @@ internal abstract class Creature
         public int Agility
         {
             get { return _agility; }
-            init
-            {
-                if (value < 0)
-                {
-                    _agility = 0;
-                }
-                else if (value > 10)
-                {
-                    _agility = 10;
-                }
-                else _agility = value;
-            }
+            init { _agility = Validator.Limiter(value, 0, 10); }
         }
 
-        public Elf() : base("Unknown Elf", 1)
+        public Elf() : base("Unknown Elf", 0)
         {
         }
 
-        public Elf(string name = "Unknown Elf", int level = 1, int agility = 1) : base(name, level)
+        public Elf(string name = "Unknown Elf", int level = 0, int agility = 0) : base(name, level)
         {
             Agility = agility;
         }
@@ -154,7 +107,7 @@ internal abstract class Creature
 
             if (_singCount % 3 == 0)
             {
-                if (_agility == 10) Console.WriteLine($"You've reached the maximum level of agility.");
+                if (_agility == 10) Console.WriteLine($"{Name} is singing. You've reached the maximum level of agility.");
                 else
                 {
                     _agility = Math.Min(_agility + 1, 10);
@@ -173,6 +126,11 @@ internal abstract class Creature
         {
             get { return 8 * Level + 2 * Agility; }
         }
+
+        public override string Info
+        {
+            get { return $"[{Agility}]"; }
+        }
     }
 
     public class Orc : Creature
@@ -182,25 +140,14 @@ internal abstract class Creature
         public int Rage
         {
             get { return _rage; }
-            init
-            {
-                if (value < 0)
-                {
-                    _rage = 0;
-                }
-                else if (value > 10)
-                {
-                    _rage = 10;
-                }
-                else _rage = value;
-            }
+            init { _rage = Validator.Limiter(value, 0, 10); }
         }
 
         public Orc() : base("Unknown Orc", 1) 
         {
         }
 
-        public Orc(string name = "Unknown Orc", int level = 1, int rage = 1) : base(name, level)
+        public Orc(string name = "Unknown Orc", int level = 1, int rage = 0) : base(name, level)
         {
             Rage = rage;
         }
@@ -210,7 +157,7 @@ internal abstract class Creature
 
             if (_huntCount % 2 == 0)
             {
-                if (_rage == 10) Console.WriteLine($"You've reached the maximum level of Rage.");
+                if (_rage == 10) Console.WriteLine($"{Name} is hunting. You've reached the maximum level of Rage.");
                 else
                 {
                     _rage = Math.Min(_rage + 1, 10);
@@ -228,6 +175,11 @@ internal abstract class Creature
         public override int Power
         {
             get { return 7 * Level + 3 * Rage; }
+        }
+
+        public override string Info
+        {
+            get { return $"[{Rage}]"; }
         }
     }
 }
