@@ -19,13 +19,13 @@ public static class Validator
     {
         string name = value.Trim();
         
-        if (value.Length > max)
+        if (name.Length > max)
         {
-            name = value.Substring(0, max - 1);
+            name = name.Substring(0, max - 1);
         }
-        else if (value.Length < min)
+        else if (name.Length < min)
         {
-            name = value.PadRight(min, placeholder);
+            name = name.PadRight(min, placeholder);
         }
 
         return char.ToUpper(name[0]) + name.Substring(1);

@@ -9,6 +9,7 @@ namespace Simulator;
 
 internal class Animals
 {
+    // get set 
     private string _description = "Unknown";
     private uint _size = 3;
     public uint Size
@@ -23,15 +24,9 @@ internal class Animals
         init { _description = Validator.Shortener(value, 3, 15, '#'); }
     }
 
-    public Animals(string description, uint size = 3)
-    {
-        Description = description;
-        Size = size;
-    }
-    public Animals()
-    {
 
-    }
+
+    // informacje
     public virtual string Info { get; }
 
     public override string ToString()
@@ -46,19 +41,14 @@ internal class Animals
 
 
 
-
-    public class Birds : Animals
+    // konstruktory
+    public Animals(string description, uint size = 3)
     {
-        private Boolean _canFly = true;
-        public Boolean CanFly
-        {
-            get { return _canFly; }
-            init { _canFly = value; }
-        }
+        Description = description;
+        Size = size;
+    }
+    public Animals()
+    {
 
-        public override string Info
-        {
-            get { return CanFly == true ? "fly+" : "fly-"; }
-        }
     }
 }

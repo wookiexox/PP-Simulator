@@ -8,63 +8,60 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        static void Lab4a()
+        static void Lab5a()
         {
-            Console.WriteLine("HUNT TEST\n");
-            var o = new Orc() { Name = "Gorbag", Rage = 7 };
-            o.SayHi();
-            for (int i = 0; i < 10; i++)
+            // test 1: poprawne tworzenie prostokątów z luźnych współrzędnych
+            try
             {
-                o.Hunt();
-                o.SayHi();
+                var rect1 = new Rectangle(2, 3, 5, 5);
+                Console.WriteLine($"Prostokąt 1: {rect1}");
+                var rect2 = new Rectangle(5, 5, 2, 3);
+                Console.WriteLine($"Prostokąt 2: {rect2}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Błąd: {ex.Message}");
             }
 
-            Console.WriteLine("\nSING TEST\n");
-            var e = new Elf("Legolas", agility: 2);
-            e.SayHi();
-            for (int i = 0; i < 10; i++)
+            // test 2: tworzenie prostokąta z punktów
+            try
             {
-                e.Sing();
-                e.SayHi();
+                var p1 = new Point(1, 1);
+                var p2 = new Point(4, 3);
+                var rect3 = new Rectangle(p1, p2);
+                Console.WriteLine($"Prostokąt 3: {rect3}");
+            }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine($"Błąd: {ex.Message}");
             }
 
-            Console.WriteLine("\nPOWER TEST\n");
-            Creature[] creatures = {
-                o,
-                e,
-                new Orc("Morgash", 3, 8),
-                new Elf("Elandor", 5, 3)
-            };
-            foreach (Creature creature in creatures)
+            // test 3: próba utworzenia chudego prostokąta
+            try
             {
-                Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
+                var rect4 = new Rectangle(2, 3, 2, 7);
+                Console.WriteLine($"Prostokąt 4: {rect4}");
             }
+            catch (ArgumentException ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            // test 4: sprawdzanie czy zawiera punkty
+            Console.WriteLine("=====================");
+            var rect5 = new Rectangle(0, 0, 5, 5);
+            var point0 = new Point(0, 0);
+            var point1 = new Point(3, 4);
+            var point3 = new Point(5, 5);
+            var point2 = new Point(6, 6);
+            Console.WriteLine($"Prostokąt 5: {rect5}");
+            Console.WriteLine($"Punkt {point0}? {rect5.Contains(point0)}");
+            Console.WriteLine($"Punkt {point1}? {rect5.Contains(point1)}");
+            Console.WriteLine($"Punkt {point2}? {rect5.Contains(point2)}");
+            Console.WriteLine($"Punkt {point3}? {rect5.Contains(point3)}");
         }
 
-        Lab4a();
-
-        Creature c = new Elf("Elandor", 5, 3);
-        Console.WriteLine(c);  // ELF: Elandor [5]
-
-        static void Lab4b()
-        {
-            object[] myObjects = {
-                new Animals() { Description = "dogs"},
-                new Birds { Description = "  eagles ", Size = 10 },
-                new Elf("e", 15, -3),
-                new Orc("morgash", 6, 4)
-            };
-            Console.WriteLine("\nMy objects:");
-            foreach (var o in myObjects) Console.WriteLine(o);
-            /*
-                My objects:
-                ANIMALS: Dogs <3>
-                BIRDS: Eagles (fly+) <10>
-                ELF: E## [10][0]
-                ORC: Morgash [6][4]
-            */
-        }
-        Lab4b();
+        Lab5a();
     }
 }
 
