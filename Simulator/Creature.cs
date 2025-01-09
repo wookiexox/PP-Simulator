@@ -57,25 +57,27 @@ internal class Creature
         if (_level < 10) _level++;
     }
 
-    public virtual void SayHi() { }
-
-    public void Go(Direction direction)
-    {
-        string directionString = direction.ToString().ToLower();
-        Console.WriteLine($"{Name} goes {directionString}");
+    public virtual string Greeting() 
+    { 
+        return "";
     }
-    
-    public void Go(Direction[] directions)
+
+    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+
+    public string[] Go(Direction[] directions)
     {
-        foreach (var direction in directions)
+        List<string> result = new List<string>();
+        foreach (Direction direction in directions)
         {
-            Go(direction);
+            result.Add(Go(direction));
         }
+        return result.ToArray();
     }
 
-    public void Go(string directionsString)
+
+    public string[] Go(string directionsString)
     {
         Direction[] directions = DirectionParser.Parse(directionsString);
-        Go(directions);
+        return Go(directions);
     }
 }

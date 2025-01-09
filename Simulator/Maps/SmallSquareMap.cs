@@ -9,7 +9,7 @@ namespace Simulator.Maps;
 /// <summary>
 /// Small square map with given size
 /// </summary>
-internal class SmallSquareMap : Map
+public class SmallSquareMap : Map
 {
     public int Size { get; }
 

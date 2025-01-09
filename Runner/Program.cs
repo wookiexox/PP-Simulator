@@ -1,9 +1,9 @@
-﻿using System.Net.Security;
+﻿using Simulator;
 using Simulator.Maps;
-using static Simulator.Animals;
-using static Simulator.Creature;
+using Point = Simulator.Point;
+using Rectangle = Simulator.Rectangle;
 
-namespace Simulator;
+namespace Runner;
 
 internal class Program
 {
@@ -111,4 +111,3 @@ internal class Program
         Lab5b();
     }
 }
-

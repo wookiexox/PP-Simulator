@@ -51,19 +51,13 @@ internal class Orc : Creature
     {
         _huntCount++;
 
-        if (_huntCount % 2 == 0)
+        if (_huntCount % 2 == 0 && _rage < 10)
         {
-            if (_rage == 10) Console.WriteLine($"{Name} is hunting. You've reached the maximum level of Rage.");
-            else
-            {
-                _rage = Math.Min(_rage + 1, 10);
-                Console.WriteLine($"{Name} is hunting. Rage increased to {Rage}.");
-            }
+            _rage = Math.Min(_rage + 1, 10);
         }
-        else Console.WriteLine($"{Name} is hunting.");
     }
-    public override void SayHi()
+    public override string Greeting()
     {
-        Console.WriteLine($"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.");
+        return $"Hi, I'm {Name}, my level is {Level}, my rage is {Rage}.";
     }
 }
