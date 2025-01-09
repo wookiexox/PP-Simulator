@@ -21,7 +21,7 @@ public static class Validator
         
         if (name.Length > max)
         {
-            name = name.Substring(0, max - 1);
+            name = name.Substring(0, max);
         }
         else if (name.Length < min)
         {
