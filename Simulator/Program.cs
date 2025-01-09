@@ -1,4 +1,5 @@
 ﻿using System.Net.Security;
+using Simulator.Maps;
 using static Simulator.Animals;
 using static Simulator.Creature;
 
@@ -62,6 +63,52 @@ internal class Program
         }
 
         Lab5a();
+
+        static void Lab5b()
+        {
+            Console.WriteLine();
+            Console.WriteLine("=====================");
+
+            // mapa o rozmiarze 10
+            try
+            {
+                var map = new SmallSquareMap(10);
+
+                // sprawdzanie istnienia punktów
+                var insidePoint = new Point(5, 5);
+                var outsidePoint = new Point(15, 15);
+                Console.WriteLine($"Punkt {insidePoint} istnieje? {map.Exist(insidePoint)}");
+                Console.WriteLine($"Punkt {outsidePoint} istnieje? {map.Exist(outsidePoint)}");
+
+                // ruch góra-dół
+                var startPoint = new Point(7, 7);
+                Console.WriteLine($"Start: {startPoint}");
+                Console.WriteLine($"Ruch w dół: {map.Next(startPoint, Direction.Down)}");
+                Console.WriteLine($"Ruch w lewo: {map.Next(startPoint, Direction.Left)}");
+
+                // ruch na ukos
+                Console.WriteLine($"Ruch prawy-górny: {map.NextDiagonal(startPoint, Direction.Up)}");
+                var startPoint1 = new Point(9, 9);
+                Console.WriteLine($"Start: {startPoint1}");
+                Console.WriteLine($"Ruch prawy-górny: {map.NextDiagonal(startPoint1, Direction.Up)}");
+
+                // tworzenie zbyt dużej mapy
+                try
+                {
+                    var invalidMap = new SmallSquareMap(25);
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Console.WriteLine($"Błąd: {ex.Message}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Błąd: {ex.Message}");
+            }
+        }
+
+        Lab5b();
     }
 }
 
