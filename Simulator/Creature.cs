@@ -14,8 +14,8 @@ public class Creature
     private string _name = "Unknown";
     private int _level;
     public virtual int Power { get; }
-    private SmallMap _map;
-    public SmallMap Map => _map;
+    private Map _map;
+    public Map Map => _map;
     private Point _position;
     public Point Position => _position;
 
@@ -98,7 +98,7 @@ public class Creature
         return Go(directions);
     }*/
 
-    public void AssignMap(SmallMap map, Point position)
+    public void AssignMap(Map map, Point position)
     {
         if (map == null) throw new ArgumentNullException(nameof(map));
         if (!map.Exist(position)) throw new ArgumentOutOfRangeException("Position is outside of the map.");

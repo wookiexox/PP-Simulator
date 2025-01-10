@@ -8,14 +8,14 @@ namespace Simulator.Maps;
 
 public abstract class SmallMap : Map
 {
-    private readonly Dictionary<Point, List<Creature>> _creatures = new();
+    /*private readonly Dictionary<Point, List<Creature>> _creatures = new();*/
 
     protected SmallMap(int size) : base(size, size)
     {
         if (size > 20) throw new ArgumentOutOfRangeException("Both SizeX and SizeY must be smaller than 20.");
     }
 
-    public void Add(Creature creature, Point position)
+    /*public void Add(Creature creature, Point position)
     {
         if (!Exist(position)) throw new ArgumentOutOfRangeException("Position is outside of the map.");
         if (!_creatures.ContainsKey(position)) _creatures[position] = new List<Creature>();
@@ -46,5 +46,5 @@ public abstract class SmallMap : Map
     public List<Creature> At(int x, int y)
     {
         return At(new Point(x, y));
-    }
+    }*/
 }

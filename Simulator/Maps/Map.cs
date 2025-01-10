@@ -13,6 +13,7 @@ public abstract class Map
 {
     public int SizeX { get; }
     public int SizeY { get; }
+    protected readonly Dictionary<Point, List<Creature>> _creatures = new();
 
     /// <summary>
     /// Construct a map with given walls sizes.
@@ -57,4 +58,39 @@ public abstract class Map
     /// <param name="d">Direction.</param>
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
+
+    public virtual void Add(Creature creature, Point position)
+    {
+        if (!_creatures.ContainsKey(position))
+            _creatures[position] = new List<Creature>();
+
+        _creatures[position].Add(creature);
+    }
+
+    public virtual void Remove(Creature creature, Point position)
+    {
+        if (_creatures.ContainsKey(position))
+        {
+            _creatures[position].Remove(creature);
+
+            if (_creatures[position].Count == 0)
+                _creatures.Remove(position);
+        }
+    }
+
+    public virtual void Move(Creature creature, Point from, Point to)
+    {
+        Remove(creature, from);
+        Add(creature, to);
+    }
+
+    public virtual List<Creature> At(Point position)
+    {
+        return _creatures.ContainsKey(position) ? _creatures[position] : new List<Creature>();
+    }
+
+    public virtual List<Creature> At(int x, int y)
+    {
+        return At(new Point(x, y));
+    }
 }
