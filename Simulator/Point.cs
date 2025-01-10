@@ -43,4 +43,29 @@ public readonly struct Point
         
         return new Point(X, Y);
     }
+
+
+    public static bool operator ==(Point p1, Point p2)
+    {
+        return p1.X == p2.X && p1.Y == p2.Y;
+    }
+
+    public static bool operator !=(Point p1, Point p2)
+    {
+        return !(p1 == p2);
+    }
+
+    public override bool Equals(object obj)
+    {
+        if (obj is Point point)
+        {
+            return X == point.X && Y == point.Y;
+        }
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(X, Y);
+    }
 }

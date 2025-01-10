@@ -4,15 +4,20 @@ using System.Linq;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.Maps;
 
 namespace Simulator;
 
-internal class Creature
+public class Creature
 {
     // get set 
     private string _name = "Unknown";
     private int _level;
     public virtual int Power { get; }
+    private SmallMap _map;
+    public SmallMap Map => _map;
+    private Point _position;
+    public Point Position => _position;
 
     public string Name
     {
@@ -62,9 +67,21 @@ internal class Creature
         return "";
     }
 
-    public string Go(Direction direction) => $"{direction.ToString().ToLower()}";
+    public string Go(Direction direction)
+    {
+        if (_map == null) return "Creature has no map assigned.";
 
-    public string[] Go(Direction[] directions)
+        Point newPosition = _map.Next(_position, direction);
+        if (newPosition != _position)
+        {
+            _map.Move(this, _position, newPosition);
+            _position  = newPosition;
+        }
+
+        return $"Moved to {_position}";
+    }
+
+    /*public string[] Go(Direction[] directions)
     {
         List<string> result = new List<string>();
         foreach (Direction direction in directions)
@@ -79,5 +96,15 @@ internal class Creature
     { 
         Direction[] directions = DirectionParser.Parse(directionsString).ToArray();
         return Go(directions);
+    }*/
+
+    public void AssignMap(SmallMap map, Point position)
+    {
+        if (map == null) throw new ArgumentNullException(nameof(map));
+        if (!map.Exist(position)) throw new ArgumentOutOfRangeException("Position is outside of the map.");
+
+        _map = map;
+        _position = position;
+        _map.Add(this, position);
     }
 }
