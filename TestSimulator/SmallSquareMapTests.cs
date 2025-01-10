@@ -17,7 +17,7 @@ public class SmallSquareMapTests
     public void Constructor_ValidSize_ShouldSetSize(int size)
     {
         var map = new SmallSquareMap(size);
-        Assert.Equal(size, map.Size);
+        Assert.Equal(size, map.SizeX);
     }
 
     [Theory]

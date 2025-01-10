@@ -7,35 +7,17 @@ using System.Threading.Tasks;
 namespace Simulator.Maps;
 
 /// <summary>
-/// Small square map with given size
+/// Small square map with boundaries.
 /// </summary>
-public class SmallSquareMap : Map
+public class SmallSquareMap : SmallMap
 {
-    public int Size { get; }
-
     /// <summary>
-    /// Map constructor with size arg.
+    /// Map constructor with wall size..
     /// </summary>
     /// <param name="size">Size of square's wall.</param>
     /// <exception cref="ArgumentOutOfRangeException">Threw if size is smaller than 5 or bigger than 20.</exception>
-    public SmallSquareMap(int size)
+    public SmallSquareMap(int size) : base(size) 
     {
-        if (size < 5 || size > 20)
-        {
-            throw new ArgumentOutOfRangeException(nameof(size), "Bok planszy powinien mieć długośc 5-20.");
-        }
-
-        Size = size;
-    }
-
-    /// <summary>
-    /// Check if point belongs to the map.
-    /// </summary>
-    /// <param name="p">Point to check.</param>
-    /// <returns></returns>
-    public override bool Exist(Point p)
-    {
-        return p.X >= 0 && p.X < Size && p.Y >= 0 && p.Y < Size;
     }
 
     /// <summary>

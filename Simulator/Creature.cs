@@ -76,8 +76,8 @@ internal class Creature
 
 
     public string[] Go(string directionsString)
-    {
-        Direction[] directions = DirectionParser.Parse(directionsString);
+    { 
+        Direction[] directions = DirectionParser.Parse(directionsString).ToArray();
         return Go(directions);
     }
 }
