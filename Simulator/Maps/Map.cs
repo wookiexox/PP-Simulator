@@ -13,7 +13,7 @@ public abstract class Map
 {
     public int SizeX { get; }
     public int SizeY { get; }
-    protected readonly Dictionary<Point, List<Creature>> _creatures = new();
+    private readonly Dictionary<Point, List<Creature>> _creatures = new();
 
     /// <summary>
     /// Construct a map with given walls sizes.
@@ -65,6 +65,8 @@ public abstract class Map
             _creatures[position] = new List<Creature>();
 
         _creatures[position].Add(creature);
+
+        /*Console.WriteLine($"Dodano {creature.Name} na pozycję {position.X}, {position.Y}");*/
     }
 
     public virtual void Remove(Creature creature, Point position)

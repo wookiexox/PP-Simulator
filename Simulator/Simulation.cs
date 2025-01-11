@@ -81,7 +81,8 @@ public class Simulation
         {
             var creature = Creatures[i];
             var position = Positions[i];
-            map.Add(creature, position);
+            /*map.Add(creature, position);*/
+            Console.WriteLine($"Dodawanie stwora {creature.Name} na pole {position.X}, {position.Y} - iteracja {i + 1}");
             creature.AssignMap(map, position);
         }
     }
@@ -90,21 +91,31 @@ public class Simulation
     /// Makes one move of current creature in current direction.
     /// Throw error if simulation is finished.
     /// </summary>
-    public void Turn() 
+    public void Turn()
     {
         if (Finished)
             throw new InvalidOperationException("Simulation is already finished.");
 
-        Direction[] directions = DirectionParser.Parse(CurrentMoveName).ToArray();
-        if (directions.Length > 0)
+        Direction[] directions = DirectionParser.Parse(Moves).ToArray();
+
+        while (_currentTurnIndex < Moves.Length)
         {
-            var currentDirection = directions[0];
+            var currentCreatureIndex = _currentTurnIndex % Creatures.Count;
+            var currentCreature = Creatures[currentCreatureIndex];
+
+            var currentDirection = directions[_currentTurnIndex];
+
             CurrentCreature.Go(currentDirection);
+
+            Console.WriteLine($"{currentCreature.Name} moves {currentDirection}");
+            _currentTurnIndex++;
+
+
+            if (_currentTurnIndex >= Moves.Length)
+            {
+                Finished = true;
+                break;
+            }
         }
-
-        _currentTurnIndex++;
-
-        if (_currentTurnIndex >= Moves.Length)
-            Finished = true;
     }
 }

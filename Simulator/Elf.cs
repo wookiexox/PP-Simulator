@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Simulator;
 
-internal class Elf : Creature
+public class Elf : Creature
 {
     // get set 
     private int _singCount;

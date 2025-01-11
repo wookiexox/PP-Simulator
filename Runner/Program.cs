@@ -1,7 +1,9 @@
-﻿using Simulator;
+﻿using System.Text;
+using Simulator;
 using Simulator.Maps;
 using Point = Simulator.Point;
 using Rectangle = Simulator.Rectangle;
+using SimConsole;
 
 namespace Runner;
 
@@ -9,7 +11,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        static void Lab5a()
+        /*static void Lab5a()
         {
             // test 1: poprawne tworzenie prostokątów z luźnych współrzędnych
             try
@@ -108,6 +110,8 @@ internal class Program
             }
         }
 
-        Lab5b();
+        Lab5b();*/
+
+        
     }
 }

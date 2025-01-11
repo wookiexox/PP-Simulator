@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace Simulator;
 
-internal class Orc : Creature
+public class Orc : Creature
 {
     // get set
     private int _huntCount;
