@@ -13,7 +13,7 @@ public abstract class Map
 {
     public int SizeX { get; }
     public int SizeY { get; }
-    private readonly Dictionary<Point, List<Creature>> _creatures = new();
+    private readonly Dictionary<Point, List<IMappable>> _creatures = new();
 
     /// <summary>
     /// Construct a map with given walls sizes.
@@ -59,40 +59,13 @@ public abstract class Map
     /// <returns>Next point.</returns>
     public abstract Point NextDiagonal(Point p, Direction d);
 
-    public virtual void Add(Creature creature, Point position)
-    {
-        if (!_creatures.ContainsKey(position))
-            _creatures[position] = new List<Creature>();
+    public abstract void Add(IMappable creature, Point position);
 
-        _creatures[position].Add(creature);
+    public abstract void Remove(IMappable creature, Point position);
 
-        /*Console.WriteLine($"Dodano {creature.Name} na pozycję {position.X}, {position.Y}");*/
-    }
+    public abstract void Move(IMappable creature, Point from, Point to);
 
-    public virtual void Remove(Creature creature, Point position)
-    {
-        if (_creatures.ContainsKey(position))
-        {
-            _creatures[position].Remove(creature);
+    public abstract List<IMappable> At(Point position);
 
-            if (_creatures[position].Count == 0)
-                _creatures.Remove(position);
-        }
-    }
-
-    public virtual void Move(Creature creature, Point from, Point to)
-    {
-        Remove(creature, from);
-        Add(creature, to);
-    }
-
-    public virtual List<Creature> At(Point position)
-    {
-        return _creatures.ContainsKey(position) ? _creatures[position] : new List<Creature>();
-    }
-
-    public virtual List<Creature> At(int x, int y)
-    {
-        return At(new Point(x, y));
-    }
+    public abstract List<IMappable> At(int x, int y);
 }

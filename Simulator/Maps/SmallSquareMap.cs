@@ -16,7 +16,7 @@ public class SmallSquareMap : SmallMap
     /// </summary>
     /// <param name="size">Size of square's wall.</param>
     /// <exception cref="ArgumentOutOfRangeException">Threw if size is smaller than 5 or bigger than 20.</exception>
-    public SmallSquareMap(int size) : base(size) 
+    public SmallSquareMap(int size) : base(size, size) 
     {
     }
 

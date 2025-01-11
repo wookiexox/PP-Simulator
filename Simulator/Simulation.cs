@@ -17,7 +17,7 @@ public class Simulation
     /// <summary>
     /// Creatures moving on the map.
     /// </summary>
-    public List<Creature> Creatures { get; }
+    public List<IMappable> Creatures { get; }
 
     /// <summary>
     /// Starting positions of creatures.
@@ -46,7 +46,7 @@ public class Simulation
     /// <summary>
     /// Creature which will be moving current turn.
     /// </summary>
-    public Creature CurrentCreature => Creatures[_currentTurnIndex % Creatures.Count];
+    public IMappable CurrentCreature => Creatures[_currentTurnIndex % Creatures.Count];
 
     /// <summary>
     /// Lowercase name of direction which will be used in current turn.
@@ -60,7 +60,7 @@ public class Simulation
     /// if number of creatures differs from 
     /// number of starting positions.
     /// </summary>
-    public Simulation(Map map, List<Creature> creatures,
+    public Simulation(Map map, List<IMappable> creatures,
         List<Point> positions, string moves)
     {
         if (creatures == null || creatures.Count == 0)
@@ -81,8 +81,6 @@ public class Simulation
         {
             var creature = Creatures[i];
             var position = Positions[i];
-            /*map.Add(creature, position);*/
-            Console.WriteLine($"Dodawanie stwora {creature.Name} na pole {position.X}, {position.Y} - iteracja {i + 1}");
             creature.AssignMap(map, position);
         }
     }
@@ -107,7 +105,6 @@ public class Simulation
 
             CurrentCreature.Go(currentDirection);
 
-            Console.WriteLine($"{currentCreature.Name} moves {currentDirection}");
             _currentTurnIndex++;
 
 

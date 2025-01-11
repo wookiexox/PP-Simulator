@@ -8,14 +8,14 @@ using Simulator.Maps;
 
 namespace Simulator;
 
-public class Creature
+public class Creature : IMappable
 {
     // get set 
     private string _name = "Unknown";
     private int _level;
     public virtual int Power { get; }
-    private Map _map;
-    public Map Map => _map;
+    private Map? _map;
+    public Map? Map => _map;
     private Point _position;
     public Point Position => _position;
 
@@ -34,13 +34,12 @@ public class Creature
 
 
     // informacje
-    public virtual string Info { get; }
+    public virtual string? Info { get; }
 
     public override string ToString()
     {
         return $"{GetType().Name.ToUpper()}: {Name} [{Level}]{Info}";
     }
-
 
     // konktruktory
     public Creature(string name, int level)
@@ -80,23 +79,6 @@ public class Creature
 
         return $"Moved to {_position}";
     }
-
-    /*public string[] Go(Direction[] directions)
-    {
-        List<string> result = new List<string>();
-        foreach (Direction direction in directions)
-        {
-            result.Add(Go(direction));
-        }
-        return result.ToArray();
-    }
-
-
-    public string[] Go(string directionsString)
-    { 
-        Direction[] directions = DirectionParser.Parse(directionsString).ToArray();
-        return Go(directions);
-    }*/
 
     public void AssignMap(Map map, Point position)
     {
