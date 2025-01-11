@@ -94,25 +94,20 @@ public class Simulation
         if (Finished)
             throw new InvalidOperationException("Simulation is already finished.");
 
-        Direction[] directions = DirectionParser.Parse(Moves).ToArray();
+        string moveName = CurrentMoveName;
+        Direction? direction = DirectionParser.Parse(moveName).FirstOrDefault();
 
-        while (_currentTurnIndex < Moves.Length)
+        if (direction.HasValue)
         {
-            var currentCreatureIndex = _currentTurnIndex % Creatures.Count;
-            var currentCreature = Creatures[currentCreatureIndex];
+            CurrentCreature.Go(direction.Value);
+        }
 
-            var currentDirection = directions[_currentTurnIndex];
+        // Przesuń indeks ruchu do kolejnego
+        _currentTurnIndex++;
 
-            CurrentCreature.Go(currentDirection);
-
-            _currentTurnIndex++;
-
-
-            if (_currentTurnIndex >= Moves.Length)
-            {
-                Finished = true;
-                break;
-            }
+        if (_currentTurnIndex >= Moves.Length)
+        {
+            Finished = true;
         }
     }
 }

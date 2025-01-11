@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Simulator.Maps;
 
 namespace Simulator;
 
-internal class Animals
+public class Animals : IMappable
 {
     // get set 
     private string _description = "Unknown";
@@ -25,22 +26,6 @@ internal class Animals
     }
 
 
-
-    // informacje
-    public virtual string Info { get; }
-
-    public override string ToString()
-    {
-        if (Info != null)
-        {
-            return $"{GetType().Name.ToUpper()}: {Description} ({Info}) <{Size}>";
-        }
-
-        return $"{GetType().Name.ToUpper()}: {Description} <{Size}>";
-    }
-
-
-
     // konstruktory
     public Animals(string description, uint size = 3)
     {
@@ -50,5 +35,47 @@ internal class Animals
     public Animals()
     {
 
+    }
+
+
+    public Map? Map { get; set; }
+    public Point Position { get; set; }
+
+    public void AssignMap(Map map, Point position)
+    {
+        if (map == null) throw new ArgumentNullException(nameof(map));
+        if (!map.Exist(position)) throw new ArgumentOutOfRangeException("Position is outside of the map.");
+
+        Map = map;
+        Position = position;
+        Map.Add(this, position);
+    }
+
+    public virtual string Go(Direction direction)
+    {
+        if (Map == null) return "Creature has no map assigned.";
+
+        Point newPosition = Map.Next(Position, direction);
+        if (newPosition != Position)
+        {
+            Map.Move(this, Position, newPosition);
+            Position = newPosition;
+        }
+
+        return $"Moved to {Position}";
+    }
+
+
+    // informacje
+    public virtual string? Info { get; }
+
+    public override string ToString()
+    {
+        if (Info != null)
+        {
+            return $"{GetType().Name.ToUpper()}: {Description} ({Info}) <{Size}>";
+        }
+
+        return $"{GetType().Name.ToUpper()}: {Description} <{Size}>";
     }
 }

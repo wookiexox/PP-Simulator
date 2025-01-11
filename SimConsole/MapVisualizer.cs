@@ -88,7 +88,8 @@ public class MapVisualizer
             {
                 Orc => 'O',
                 Elf => 'E',
-                _ => '?',
+                Birds => ((Birds)creatures[0]).CanFly ? 'B' : 'b',
+                _ => 'A',
             };
         }
 
