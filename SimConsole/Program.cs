@@ -1,7 +1,8 @@
 ﻿using System.Text;
 using SimConsole;
 using Simulator.Maps;
-using Simulator;
+using Simulator.GameLogic;
+using Simulator.Entities;
 
 class Program
 {

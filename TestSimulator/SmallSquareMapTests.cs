@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Simulator.Maps;
 using Simulator;
+using Simulator.TextLogic;
+using Simulator.GameLogic;
 
 namespace TestSimulator;
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator;
+namespace Simulator.GameLogic;
 
 public class Rectangle
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Simulator;
+namespace Simulator.TextLogic;
 
 public static class Validator
 {
@@ -18,7 +18,7 @@ public static class Validator
     public static string Shortener(string value, int min, int max, char placeholder)
     {
         string name = value.Trim();
-        
+
         if (name.Length > max)
         {
             name = name.Substring(0, max);

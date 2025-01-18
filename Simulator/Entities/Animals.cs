@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Simulator.GameLogic;
 using Simulator.Maps;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.Entities;
 
 public class Animals : IMappable
 {

@@ -1,8 +1,7 @@
 ﻿using System.Text;
-using Simulator;
 using Simulator.Maps;
-using Point = Simulator.Point;
-using Rectangle = Simulator.Rectangle;
+using Point = Simulator.GameLogic.Point;
+using Rectangle = Simulator.GameLogic.Rectangle;
 using SimConsole;
 
 namespace Runner;

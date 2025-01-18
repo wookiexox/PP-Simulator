@@ -4,9 +4,11 @@ using System.Linq;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.GameLogic;
 using Simulator.Maps;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.Entities;
 
 public class Creature : IMappable
 {
@@ -23,7 +25,7 @@ public class Creature : IMappable
     {
         get { return _name; }
         init { _name = Validator.Shortener(value, 3, 20, '#'); }
-    } 
+    }
 
     public int Level
     {
@@ -47,7 +49,7 @@ public class Creature : IMappable
         Name = name;
         Level = level;
     }
-        
+
     public Creature()
     {
 
@@ -61,8 +63,8 @@ public class Creature : IMappable
         if (_level < 10) _level++;
     }
 
-    public virtual string Greeting() 
-    { 
+    public virtual string Greeting()
+    {
         return "";
     }
 
@@ -74,7 +76,7 @@ public class Creature : IMappable
         if (newPosition != _position)
         {
             _map.Move(this, _position, newPosition);
-            _position  = newPosition;
+            _position = newPosition;
         }
 
         return $"Moved to {_position}";

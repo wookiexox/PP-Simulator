@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.GameLogic;
 using Simulator.Maps;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.Entities;
 
 public class Birds : Animals
 {
     // get set
-    private Boolean _canFly = true;
-    public Boolean CanFly
+    private bool _canFly = true;
+    public bool CanFly
     {
         get { return _canFly; }
         init { _canFly = value; }

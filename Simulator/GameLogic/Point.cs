@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.GameLogic;
 
 public readonly struct Point
 {
@@ -40,7 +41,7 @@ public readonly struct Point
             case Direction.Up: return new Point(X + 1, Y + 1);
             case Direction.Down: return new Point(X - 1, Y - 1);
         }
-        
+
         return new Point(X, Y);
     }
 

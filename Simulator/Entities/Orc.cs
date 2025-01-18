@@ -5,8 +5,9 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.Entities;
 
 public class Orc : Creature
 {

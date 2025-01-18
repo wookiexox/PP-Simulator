@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Simulator.Maps;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.GameLogic;
 
 public class Simulation
 {
@@ -77,7 +78,7 @@ public class Simulation
         Positions = positions;
         Moves = moves.ToLower();
 
-        for (int i = 0;  i < Creatures.Count; i++)
+        for (int i = 0; i < Creatures.Count; i++)
         {
             var creature = Creatures[i];
             var position = Positions[i];

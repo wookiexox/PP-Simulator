@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Simulator.TextLogic;
 
-namespace Simulator;
+namespace Simulator.Entities;
 
 public class Elf : Creature
 {
